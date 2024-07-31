@@ -1,0 +1,37 @@
+{% include 'header.html' %}
+{% load static %}
+    <section class="ftco-section">
+      <div class="container" style="background:#fafafa !important;padding-bottom: 20px;">
+        <div class="row no-gutters justify-content-center ">
+          <div class="col-md-7 text-center heading-section " style="padding-top: 30px;">
+            <h2>LAND DETAILS</h2>
+          </div>
+        </div>
+		<center>
+      <div class="row">
+        {% for i in detail %}
+         <div class="col-md-5">
+          <img src="/media/{{i.image}}" width="100%;">
+          <h4 style="float: left;">Land Square Ft: {{i.sqrtft}} </h4> <div style="float: right;"><a href="/media/{{i.video}}" target="_blank" class="btn btn-success">Download Video</a></div>
+          <div style="clear: both;"></div>
+          <p>Type of Land: {{i.type_land}}</p>
+          <p>Type of Cultivation: {{i.cultivation}}</p>
+          <h4>How many Acres: {{i.acres}}</h4>
+          <p>How many water Pipes: {{i.pipes}}</p>
+          <h5>Type of Land Sale/Lease: {{i.sale}}</h5>
+          <h5>Sale or Lease Amount: {{i.amount}}</h5>
+          <h4>About Land</h4>
+          <p>{{i.about_land}}</p>
+          <h4>Address</h4>
+          <address>{{i.place}}</address>
+          {% if i.status == 'Purchased' %}
+              <input type="submit" class="btn btn-danger disabled " value="Saled">
+          {% else %}
+          <a href="{% url 'enquiry' pk=i.id fid=i.farmer_id_id %}" class="btn btn-info btn-block">Enquire Now</a>
+          {% endif %}
+         </div>
+         {% endfor %}
+       </div>
+          </center>
+      </section>
+{% include 'footer.html' %}

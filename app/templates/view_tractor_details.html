@@ -1,0 +1,50 @@
+
+{% include 'user_header.html' %}
+<div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            View Tractor Details</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Sno</th>
+                    <th>Tractor ID</th>
+                    <th>Tractor Name</th>
+					<th>Description</th>
+					 <th>Price</th>
+					 <th>Image</th>
+					 
+                    
+                  </tr>
+                </thead>
+                <tbody>
+				{% for i in detail %}
+
+				<tr style="text-align:center;">
+					<td>{{forloop.counter}}</td>
+					<td>{{i.id }}</td>
+					<td>{{i.title}}</td>
+					<td>{{i.desc}}</td>
+					<td>{{i.price }}</td>
+					<td><img style="max-height: 70px;" src="{{ i.tractor_image.url }}" alt="Tractor Image"></td>
+
+					
+					
+					
+					
+					
+				</tr>
+				{% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center bg-primary">No Tractor</td>
+                        </tr>
+				{% endfor %}
+				
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+</div>

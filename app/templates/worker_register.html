@@ -1,0 +1,40 @@
+{%include 'header.html'%}
+<div class="container" style="margin-top: 150px;width: 50%;background: #DDD;padding: 50px;">
+	<h3>WORKER REGISTRATION</h3>
+<form  method="post">{% csrf_token %}
+	{% if messages %}
+              {% for i in messages %}
+                <div class="alert alert-success">{{i}}</div>
+              {% endfor %}
+            {% endif %}
+              <div class="row">
+      
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" name="uname" placeholder="Your Name" required="required">
+                    <label for="">Mobile Number</label>
+                    <input type="number" class="form-control" name="mobile"  placeholder="Your number" required="required">
+                 
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter Your Email" required="required">
+
+                    <label for="">Username</label>
+                    <input type="text" class="form-control" name="Username" placeholder="Enter Your Username" required="required">
+
+                    <label for="">Password</label>
+                    <input type="password" class="form-control" name="pwd" placeholder="Enter Your Password" required="required">
+                    
+                    <label for="">Experience</label>
+                    <input type="text" class="form-control" name="Experience" placeholder="Enter Your Experience " required="required">
+
+                    
+                    <label for="">Address</label>
+                    <textarea  class="form-control" name="address" required="required"></textarea>
+                <div class="col-md-12 mt-3">
+                  <div class="form-group">
+                    <input type="submit" value="Create an Account" class="btn btn-success btn-lg">
+                  </div>
+                </div>
+              </div>
+            </form>
+ </div>
+ {% include 'footer.html' %}

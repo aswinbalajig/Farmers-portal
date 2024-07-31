@@ -1,0 +1,45 @@
+{% include 'user_header.html' %}
+<style>
+table {
+	font-family: times new roman;
+	border-collapse: collapse;
+	width: 100%;
+}
+td, th{
+	border: 1px solid #dddddd;
+	text-align: center;
+	padding: 8px;
+	}
+</style>
+
+ <div class="container" style="margin:0 auto;">
+ 	<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-top: 100px;">
+    <div class="card" >
+        <h5 class="card-header">Attendance Details</h5>
+        <div class="card-body">
+            <div class="table-responsive ">
+                <table class="table table-bordered">
+                    <thead style="background: #ff407b;color: #FFF">
+                        <tr class="white">
+							<th>Choose Month&Year</th>
+                            <th>Choose Date to Add/View Attendance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <form method="GET" action="{% url 'show_attendance' %}"> {% csrf_token %}
+                        <tr>
+							<td><input type="month" name="month" placeholder="Select Month"></td>
+                            <td>
+                                <input type="date" name="date" placeholder="Select Date">
+                             <input type="submit" class="btn  btn-primary btn-xs" value="Submit">
+                            </td>
+                        </tr>
+                        </td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

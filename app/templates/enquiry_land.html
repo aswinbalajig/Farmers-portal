@@ -1,0 +1,61 @@
+{% include 'sale_header.html'%}
+
+<div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            View Lands</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Sno</th>
+                    <th>Property ID</th>
+                    <th>Land Sqrt</th>
+					<th>Farmer Name</th>
+					 <th>Mobile</th>
+					 <th>Sale/Lease Amount</th>
+                    <th>Type of Sale</th>
+                    <th>Acers</th>
+                    <th>Enquiry Date</th>
+                    <th>Status</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+				{% for i in detail %}
+				<tr style="text-align:center;">
+					<td>{{forloop.counter}}</td>
+					<td>100{{i.0}}</td>
+					<td>{{i.1}}</td>
+					<td>{{i.2}}</td>
+					<td>{{i.3}}</td>
+					<td>{{i.4}}</td>
+					<td>{{i.5}}</td>
+					<td>{{i.6}}</td>
+					<td>{{i.7}}</td>
+
+					
+					<td>
+
+						{% if i.9 == 'Rejected' %}
+							<span style="color: red;font-weight: bold;">Not Given</span>
+						{% elif i.9 == 'Purchased' %}
+							<span style="color: red;font-weight: bold;">Saled</span>
+							<p>S/L Price: {{i.8}} Rs</p>
+						{% else %}
+							<span style="color: orange;font-weight: bold;">Waiting for Update</span>
+ 
+						{% endif %}
+						 </td>
+					
+					
+				</tr>
+				{% endfor %}
+                  
+                </tbody>
+              </table>
+				
+            </div>
+          </div>
+</div>

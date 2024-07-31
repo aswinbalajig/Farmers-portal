@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>GREENARY ACRES</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700" rel="stylesheet ">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="css/jquery.timepicker.css' %}">
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body style="background: url({% static 'images/hd3.jpg' %});">
+    
+    <nav  class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" >
+      <div class="container">
+        <div class="navbar-brand">
+		<h1 style="font-size: 25px;font-family: Lucida Handwriting;"><font color="white">GREENARY ACRES</font></h1>
+		</div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div  class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+				<li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Register</a></li>
+        <li class="nav-item"><a href="{% url 'farmer_login' %}" class="nav-link">Farmer Login</a></li>
+        <li class="nav-item"><a href="{%url 'worker_register'%}" class="nav-link">Worker Register</a></li>
+				<li class="nav-item"><a href="{% url 'user_login' %}" class="nav-link">Login</a></li>
+        <li class="nav-item"><a href="{% url 'sale_land' %}" class="nav-link">Buy Land</a></li>
+				<li class="nav-item"><a href="/admin/" class="nav-link">Admin Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <style type="text/css">
+  .ftco-navbar-light
+  {
+    background: #08640D !important;
+  }
+  .ftco-navbar-light .navbar-nav > .nav-item > .nav-link
+  {
+    font-family:Georgia, 'Times New Roman', Times, serif !important;
+    font-size: 20px;
+  }
+  .ftco-navbar-light
+  {
+    top: 0 !important;
+  }
+  ul{
+    width: 1000px;
+  }
+  .nav-link{
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+</style>

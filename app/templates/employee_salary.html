@@ -1,0 +1,57 @@
+{% include 'user_header.html' %}
+<style>
+table {
+	font-family: times new roman;
+	border-collapse: collapse;
+	width: 100%;
+}
+td, th{
+	border: 1px solid #dddddd;
+	text-align: center;
+	padding: 8px;
+	}
+</style>
+<form action="{% url 'calculate_salary' %}" method="get">{% csrf_token %}
+ <div class="container" style="margin:0 auto;">
+ 	<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-top: 100px;">
+    <div class="card" >
+        <h5 class="card-header">Employee Details</h5>
+        <div class="card-body">
+            <div class="table-responsive ">
+                <table class="table table-bordered">
+                    <thead style="background: #ff407b;color: #FFF">
+                        <tr class="white">
+	                        <th>S.No</th>
+							<th>E Name</th>
+                            <th>Salary/Day</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Extra Salary</th>
+                            <th>Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in detail %}
+                        <tr>
+					        <td>{{forloop.counter}}</td>
+							<td>{{i.worker_id.name}}</td>
+                            <td>{{i.salary}}</td>
+                            <td><input type="date" name="from" class="form-control" ><input type="hidden" name="id" value="{{i.worker_id_id}}"> <input type="hidden" value="{{i.salary}}" name="salary"></td>
+                            <td><input type="date" name="to" class="form-control" ></td>
+                            <td><input type="text" name="extra" class="form-control" value="0"></td>
+							<td><input type="submit"  class="btn btn-primary"></td>                            
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center bg-primary">No Employee</td>
+                        </tr>
+                       {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</from>

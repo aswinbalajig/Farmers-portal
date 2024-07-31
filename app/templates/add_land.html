@@ -1,0 +1,81 @@
+{% include 'user_header.html' %}
+<div class="container" style="margin:0 auto;padding-top:30px;">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Add Land Details</h5>
+         {% if messages %}
+              {% for i in messages %}
+                <div class="alert alert-success">{{i}}</div>
+              {% endfor %}
+            {% endif %}
+            <form  id="basicform" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <div class="form-group">
+                    <label for="inputUserName">Land Square Ft</label>
+                    <input id="inputUserName" type="text" name="sqrtft" required="required"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Type of Land</label>
+                    <input id="inputUserName" type="text" name="type_land" required="required"  class="form-control">
+                </div>
+                 <div class="form-group">
+                    <label for="inputUserName">Type of Cultivation</label>
+                    <input id="inputUserName" type="text" name="cultivation" required="required"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">How many Acres</label>
+                    <input id="inputUserName" type="text" name="acres" required="required"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Type of Soil</label>
+                    <input id="inputUserName" type="text" name="soil" required="required"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">How many water Pipes</label>
+                    <input id="inputUserName" type="text" name="pipes" required="required"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Type of Land Sale/Lease</label>
+                    <select class="form-control" name="sale">
+                        <option>Select</option>
+                        <option>Sales</option>
+                        <option>Lease</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Sale or Lease Amount</label>
+                    <input id="inputUserName" type="text" name="amount" required="required"  class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputUserName">Upload Land Image</label>
+                    <input id="inputUserName" type="file" name="image" required="required"  class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputUserName">Upload Land Video</label>
+                    <input id="inputUserName" type="file" name="video" required="required"  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Short Details About Land</label>
+                    <textarea name="about_land" class="form-control" required="required"></textarea>  
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Land Located Address</label>
+                    <textarea name="place" class="form-control" required="required"></textarea>  
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pl-0">
+                    </div>
+                    <div class="col-sm-6 pl-0">
+                        <p class="text-right">
+                            <input type="submit" class="btn btn-space btn-primary" value="Add Land" name="add_job">
+                            <button type="reset" class="btn btn-space btn-secondary">Cancel</button>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<?php } else { header("Location:farmer_login.php");}?>

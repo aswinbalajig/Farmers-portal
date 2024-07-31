@@ -1,0 +1,50 @@
+{% include 'user_header.html' %}
+{% load mathfilters %}
+
+<style>
+table {
+	font-family: times new roman;
+	border-collapse: collapse;
+	width: 100%;
+}
+td, th{
+	border: 1px solid #dddddd;
+	text-align: center;
+	padding: 8px;
+	}
+</style>
+
+ <div class="container" style="margin:0 auto;">
+ 
+ 	<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-top: 100px;">
+    <div class="card" >
+        <h5 class="card-header" style="color: green;">Salary Calculation from {{request.GET.from }} to {{request.GET.to}}</h5>
+
+        <div class="card-body">
+            <h1>No of Working Days: 7</h1>
+            <h3>No of Present Days:    {% for i in row_user %}
+                {{i.0}}
+            {% endfor %}</h3>
+            <h3>Salary/Day : {{request.GET.salary}}</h3>
+            {% if request.GET.extra == '' %}
+            {% else %}
+            <h3>Extra Salary : {{request.GET.extra}} Rs </h3>
+            {% endif %}
+            {% for i in row_user %}
+                    {% with answer=request.GET.salary  %}
+                    {% with a=i.0 %}
+                    {% with b=answer|mul:a %}
+                    {% with c=request.GET.extra %}
+
+
+                        <h3>Salary Calculation for 7 Days  = <span style="color: green;font-weight: bold;">{{ b|add:c}} Rs</span></h3>
+                    {% endwith %}
+                    {% endwith %}
+                    {% endwith %}
+                    {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+</div></div>
+
+

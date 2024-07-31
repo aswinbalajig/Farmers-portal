@@ -1,0 +1,60 @@
+
+{% include 'user_header.html' %}
+<div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            View Land Details</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Sno</th>
+                    <th>Propert ID</th>
+                    <th>Land Square Ft</th>
+					<th>Type of Land</th>
+					 <th>Sale or Lease Amount</th>
+					 <th>Type of Sale</th>
+					 <th>Status</th>
+                    <th>Option</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+				{% for i in detail %}
+
+				<tr style="text-align:center;">
+					<td>{{forloop.counter}}</td>
+					<td>{{i.id }}</td>
+					<td>{{i.sqrtft}}</td>
+					<td>{{i.type_land}}</td>
+					<td>{{i.amount }}</td>
+					<td>{{i.sale }}</td>
+					<td>
+						{% if i.status == ''%}
+							<span style="color:orange;font-weight: bold;font-size: 15px;">Not Sale/Lease</span>
+						{% elif i.status == 'Purchased' %}
+							<span style="color:green;font-weight: bold;font-size: 15px;">Saled/Leased</span>
+						{% endif %}
+					</td>
+					
+					<td>
+						<a href="{% url 'edit_land' pk=i.id %}" class="btn btn-success btn-xs"><i class="fa fa-edit"> Edit</i></a>
+						<a href="{% url 'delete_land' pk=i.id %}" class="btn btn-danger btn-xs"><i class="fa fa-trash"> Delete</i></a>
+
+					 </td>
+					
+					
+				</tr>
+				{% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center bg-primary">No Lands</td>
+                        </tr>
+				{% endfor %}
+				
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+</div>

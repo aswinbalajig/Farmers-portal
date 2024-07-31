@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+{% load static %}
+<!--
+	Hielo by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>GREENARY ACRES </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header" class="alt">
+				<div class="logo" style="font-size: 25px;font-family: Lucida Handwriting;"><a href="{% url 'home' %}">GREENARY ACRES </a></div>
+				<a href="#menu" style="font-size: 25px;font-family: Brush Script MT, Brush Script Std, cursive;">Menu</a>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="{% url 'home' %}">Home</a></li>
+					<li><a href="{% url 'register' %}">Register</a></li>
+					<li><a href="{% url 'farmer_login' %}">Farmer Login</a></li>
+					<li><a href="{%url 'worker_register'%}">Worker Register</a></li>
+					<li><a href="{% url 'user_login' %}">Login</a></li>
+					<li><a href="{% url 'sale_land' %}">Buy Land</a></li>
+					<li><a href="/admin/">Admin Login</a></li>					
+					
+				</ul>
+			</nav>
+
+		<!-- Banner -->
+			<section class="banner full">
+				<article>
+					<img src="{% static 'images/1.jpg' %}" alt="" />
+					<div class="inner">
+						<header>
+							<p>WORKER DETAILS</p>
+							<h2>SALE AND BUY FARMING LAND</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+					<img src="{% static 'images/hd.jpg' %}" alt="" />
+					<div class="inner">
+					</div>
+				</article>
+				<article>
+					<img src="{% static 'images/hd4.jpg' %}"  alt="" />
+					<div class="inner">
+					</div>
+				</article>
+				<article>
+					<img src="{% static 'images/hd6.jpg' %}"  alt="" />
+					<div class="inner">
+					</div>
+				</article>
+				<article>
+					<img src="{% static 'images/hd5.jpg' %}"  alt="" />
+					<div class="inner">
+					</div>
+				</article>
+			</section>
+
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/skel.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+<style type="text/css">
+	#menu
+	{
+		background: #08640D !important;
+		display: block !important;
+	}
+	#menu > ul.links > li > a:not(.button)
+	{
+
+    font-family: Brush Script MT, Brush Script Std, cursive !important;
+    font-size: 18px;
+    color: #FFF !important;
+	}
+</style>
+	</body>
+</html>

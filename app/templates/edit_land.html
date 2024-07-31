@@ -1,0 +1,73 @@
+{% include 'user_header.html' %}
+<div class="container" style="margin:0 auto;padding-top:30px;">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Update Land Details</h5>
+         {% if messages %}
+              {% for i in messages %}
+                <div class="alert alert-success">{{i}}</div>
+              {% endfor %}
+            {% endif %}
+            <form  id="basicform" method="post" enctype="multipart/form-data">{% csrf_token %}
+                {% for i in detail %}
+                <div class="form-group">
+                    <label for="inputUserName">Land Square Ft</label>
+                    <input id="inputUserName" type="text" name="sqrtft" required="required"  class="form-control" value="{{i.sqrtft}}"> 
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Type of Land</label>
+                    <input id="inputUserName" type="text" name="type_land" required="required"  class="form-control" value="{{i.type_land}}">
+                </div>
+                 <div class="form-group">
+                    <label for="inputUserName">Type of Cultivation</label>
+                    <input id="inputUserName" type="text" name="cultivation" required="required"  class="form-control" value="{{i.cultivation}}">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">How many Acres</label>
+                    <input id="inputUserName" type="text" name="acres" required="required"  class="form-control" value="{{i.acres}}">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Type of Soil</label>
+                    <input id="inputUserName" type="text" name="soil" required="required"  class="form-control" value="{{i.soil}}">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">How many water Pipes</label>
+                    <input id="inputUserName" type="text" name="pipes" required="required"  class="form-control" value="{{i.pipes}}">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Type of Land Sale/Lease</label>
+                    <select class="form-control" name="sale">
+                        <option>Select</option>
+                        <option>Sales</option>
+                        <option>Lease</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Sale or Lease Amount</label>
+                    <input id="inputUserName" type="text" name="amount" required="required"  class="form-control" value="{{i.amount}}">
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Short Details About Land</label>
+                    <textarea name="about_land" class="form-control" required="required">{{i.about_land}}</textarea>  
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Land Located Address</label>
+                    <textarea name="place" class="form-control" required="required">{{i.place}}</textarea>  
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pl-0">
+                    </div>
+                    <div class="col-sm-6 pl-0">
+                        <p class="text-right">
+                            <input type="submit" class="btn btn-space btn-primary" value="Update Land" name="add_job">
+                            <button type="reset" class="btn btn-space btn-secondary">Cancel</button>
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<?php } else { header("Location:farmer_login.php");}?>

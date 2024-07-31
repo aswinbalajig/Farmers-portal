@@ -1,0 +1,35 @@
+{% include 'user_header.html' %}
+
+<div class="container" style="margin:0 auto;padding-top:30px;">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <h5 class="card-header">Update Sale or Not Details</h5>
+        <div class="card-body">
+            <form  id="basicform" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <div class="form-group">
+                    <label for="inputUserName">Saled or Not</label>
+                    <select class="form-control" name="sale">
+                        <option value="">Select</option>
+                        <option value="Purchased">Saled/Leased</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputUserName">Final Price</label>
+                    <input id="inputUserName" type="text" name="price"   class="form-control">
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 pl-0">
+                    </div>
+                    <div class="col-sm-6 pl-0">
+                        <p class="text-right">
+                            <input type="submit" class="btn btn-space btn-primary" value="Update Sale/Lease Status" name="add_job">
+                            <button type="reset" class="btn btn-space btn-secondary">Cancel</button>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

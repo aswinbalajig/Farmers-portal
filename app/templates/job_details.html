@@ -1,0 +1,60 @@
+{% include 'worker_header.html' %}
+<div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            View Applied Jobs</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Sno</th>
+                    <th>Title</th>
+					<th>Skill</th>
+					 <th>Experience</th>
+					 <th>IN Date</th>
+                    <th>IN Address</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+				{% for i in detail %}
+				<tr style="text-align:center;">
+					<td>{{forloop.counter}}</td>
+					<td>{{i.job_id.title}}</td>
+					<td>{{i.job_id.skill}}</td>
+					<td>{{i.job_id.experience}}
+					</td>
+					<td>{{i.job_id.interview_date}}</td>
+					<td>{{i.job_id.place}}</td>
+					<td>{{i.job_id.desc}}</td>
+					
+					<td>
+						{% if i.status == 'pending' %}
+							<span style="color: orange;font-size: 17px;font-weight: bold;">Pending</span>
+						{% elif i.status == 'accept' %}
+							<span style="color: green;font-size: 17px;font-weight: bold;">Shortlisted</span>
+							<p>{{i.job_status}}</p>
+							<p>Salary/Day: {{i.salary}}Rs</p>
+						{% elif i.status == 'reject' %}
+							<span style="color: red;font-size: 17px;font-weight: bold;">Rejected</span>
+						{% endif %} 
+					 </td>
+					
+					
+				</tr>
+				
+				{% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center bg-primary">No Jobs</td>
+                        </tr>
+                {% endfor %}
+                  
+                </tbody>
+              </table>
+                
+            </div>
+          </div>
+</div>

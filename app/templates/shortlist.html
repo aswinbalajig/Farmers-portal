@@ -1,0 +1,68 @@
+
+{% include 'user_header.html'%}
+<div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            View Applicants</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Sno</th>
+                    <th>Title</th>
+                    <th>Applicant Name</th>
+                    <th>Phone Number</th>
+                    <th>Email Id</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                    <th>Hired/Not</th>
+                  </tr>
+                </thead>
+                <tbody>
+                	{% for i in detail %}
+				<tr style="text-align:center;">
+					<td>{{forloop.counter}}</td>
+					<td>{{i.0}}</td>
+					<td>{{i.1}}</td>
+					<td>{{i.3}}</td>
+					<td>{{i.2}}</td>
+					<td>{{i.4}}</td>
+					
+					<td>
+						{% if i.5 == 'pending' %}
+							<a href="{% url 'accept' pk=i.8 %}" class="btn btn-success">Shortlist</a>
+							<a href="{% url 'reject' pk=i.8 %}" class="btn btn-danger">Reject</a>
+						{% elif i.5 == 'accept' %}
+							<span style="color: green;font-size: 17px;font-weight: bold;">Shortlisted</span>
+							<p>Salary/Day: {{i.7}} Rs</p>
+						{% elif i.5 == 'reject' %}
+							<span style="color: red;font-size: 17px;font-weight: bold;">Rejected</span>
+						{% endif %} 
+					 </td>
+					
+					<td>
+						{% if i.6 == '' %}
+							<a href="{% url 'edit_hire' pk=i.8 %}" class="btn btn-info"><i class="fa fa-edit"></i> Hire</a>
+						{% elif i.6 == 'hired' %}
+							<a href="{% url 'edit_hire' pk=i.8 %}" class="btn btn-info"><i class="fa fa-edit"></i> Hire</a>
+
+							<span style="color: green;font-size: 17px;font-weight: bold;">Hired</span>
+						{% elif i.6 == 'reject' %}
+							
+
+							<span style="color: red;font-size: 17px;font-weight: bold;">Not Hired</span>
+						{% endif %}
+					 </td>
+				</tr>
+				
+				{% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center bg-primary">No Candidates</td>
+                        </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+</div>
