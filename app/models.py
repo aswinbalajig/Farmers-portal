@@ -63,6 +63,7 @@ class Land_Detail(models.Model):
 		self.posted_date = timezone.now()
 		self.save()
 class Apply(models.Model):
+	job_id=models.ForeignKey(Job_Detail,on_delete=models.CASCADE,null=True)
 	worker_id = models.ForeignKey(Worker_Detail, on_delete=models.CASCADE)
 	farmer_id = models.ForeignKey(Register_Detail, on_delete=models.CASCADE,null=True,blank=True)
 	status = models.CharField(max_length=50)

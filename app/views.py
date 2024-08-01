@@ -10,6 +10,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from django.utils import timezone
+Messages={}
 def home(request):
 	return render(request,'index.html',{})
 
@@ -53,7 +54,7 @@ def user_login(request):
 				username = request.POST.get('username')
 				request.session['worker'] = username
 				a = request.session['worker']
-				sess = Worker_Detail.objects.only('id').get(name=a).id
+				sess = Worker_Detail.objects.get(username=a).id
 				request.session['worker_id']=sess
 				return redirect("worker_daily_attendance")
 			elif user_type == 'public':
@@ -68,7 +69,7 @@ def user_login(request):
 	return render(request,'login.html',{})
 
 def farmer_login(request):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		return redirect("employee")
 	else:
 		if request.method == 'POST':
@@ -87,7 +88,7 @@ def farmer_login(request):
 	return render(request,'farmer_login.html',{})
 
 def add_tractor(request):
-	if request.session.has_key('user'):
+	if 'user' in request.session:
 		user_id = request.session['user_id']
 		public_id = Register_Detail.objects.get(id=int(user_id))
 		if request.method=='POST':
@@ -101,7 +102,7 @@ def add_tractor(request):
 	return render(request,'add_tractor.html')
 
 def add_job(request):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		user_id = request.session['farmer_id']
 		farmer_id = Worker_Detail.objects.get(id=int(user_id))
 		cursor =connection.cursor()
@@ -125,21 +126,21 @@ def add_job(request):
 		return render(request,'farmer_login.html',{})
 
 def employee(request):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		user_id = request.session['farmer_id']
 		detail = Worker_Detail.objects.all()
 		return render(request,'jobs.html',{'detail':detail})
 	else:
 		return render(request,'farmer_login.html',{})
 def delete_job(request,pk):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		user_id = request.session['farmer_id']
 		detail = Worker_Detail.objects.filter(id=pk).delete()
 		return redirect('employee')
 	else:
 		return render(request,'farmer_login.html',{})
 def add_land(request):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		user_id = request.session['farmer_id']
 		farmer_id = Register_Detail.objects.get(id=int(user_id))
 		if request.method == 'POST':
@@ -164,7 +165,7 @@ def add_land(request):
 	else:
 		return render(request,'farmer_login.html',{})
 def lands(request):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		user_id = request.session['farmer_id']
 		detail = Land_Detail.objects.filter(farmer_id=int(user_id))
 		return render(request,'lands.html',{'detail':detail})
@@ -176,7 +177,7 @@ def view_tractor_details(request):
 	return render(request,'view_tractor_details.html',{'detail':detail})
 
 def edit_land(request,pk):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		user_id = request.session['farmer_id']
 		farmer_id = Register_Detail.objects.get(id=int(user_id))
 		detail = Land_Detail.objects.filter(id=pk)
@@ -200,7 +201,7 @@ def edit_land(request,pk):
 	else:
 		return render(request,'farmer_login.html',{})
 def delete_land(request,pk):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		user_id = request.session['farmer_id']
 		detail = Land_Detail.objects.filter(id=pk).delete()
 		return redirect('lands')
@@ -220,29 +221,34 @@ def user_logout(request):
      pass
     return render(request, 'login.html', {})
 def apply_job(request):
-	if request.session.has_key('worker'):
+	if 'worker' in request.session:
 		detail = Job_Detail.objects.all()
 		return render(request,'apply_job.html',{'detail':detail})
 	else:
 		return render(request,'login.html',{})
 def apply(request,pk):
-	if request.session.has_key('worker'):
+	if 'worker' in request.session:
 		wid = request.session['worker_id']
 		worker_id = Worker_Detail.objects.get(id=int(wid))
 		job_id = Job_Detail.objects.get(id=pk)
-		detail = Apply.objects.create(job_id=job_id,worker_id=worker_id,status='pending',job_status='',salary='')
-		return redirect('job_details')
+		if Apply.objects.filter(job_id=job_id,worker_id=worker_id).exists():
+			Messages['repeat_application']='Already applied for the job'
+			detail = Job_Detail.objects.all()
+			return render(request,'apply_job.html',{'detail':detail,'message':Messages['repeat_application']})
+		else:
+			detail = Apply.objects.create(job_id=job_id,worker_id=worker_id,status='pending',job_status='',salary='')
+			return redirect('job_details')
 	else:
 		return render(request,'login.html',{})
 def job_details(request):
-	if request.session.has_key('worker'):
+	if 'worker' in request.session:
 		wid = request.session['worker_id']
 		detail = Apply.objects.filter(worker_id=int(wid))
 		return render(request,'job_details.html',{'detail':detail})
 	else:
 		return render(request,'login.html',{})
 def shortlist(request):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session :
 		user_id = request.session['farmer_id']
 		cursor = connection.cursor()
 		sql = '''SELECT j.title,u.name,u.email,u.mobile,u.address,a.status,a.job_status,a.salary,a.id from app_job_detail as j INNER JOIN app_apply as a ON j.id=a.job_id_id 
@@ -259,7 +265,7 @@ def sale_land(request):
 		return render(request,'land_details.html',{'detail':detail})
 
 def enquiry(request,pk,fid):
-	if request.session.has_key('user'):
+	if 'user' in request.session:
 		user_id = request.session['user_id']
 		farmer_id = Register_Detail.objects.get(id=fid)
 		land_id = Land_Detail.objects.get(id=pk)
@@ -268,21 +274,21 @@ def enquiry(request,pk,fid):
 	else:
 		return render(request,'login.html',{})
 def accept(request,pk):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		user_id = request.session['farmer_id']
 		detail = Apply.objects.filter(id=pk).update(status='accept')
 		return redirect('shortlist')
 	else:
 		return render(request,'farmer_login.html',{})
 def reject(request,pk):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		user_id = request.session['farmer_id']
 		detail = Apply.objects.filter(id=pk).update(status='reject')
 		return redirect('shortlist')
 	else:
 		return render(request,'farmer_login.html',{})
 def edit_hire(request,pk):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		user_id = request.session['farmer_id']
 		if request.method == 'POST':
 			a = request.POST.get('hire')
@@ -294,7 +300,7 @@ def edit_hire(request,pk):
 	else:
 		return render(request,'farmer_login.html',{})
 def farmer_land_sale(request):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		user_id = request.session['farmer_id']
 		cursor = connection.cursor()
 		sql = '''SELECT d.id,d.sqrtft,u.name,u.mobile,d.amount,d.sale,d.acres,s.date,d.saled_price,s.status,s.id
@@ -307,7 +313,7 @@ def farmer_land_sale(request):
 	else:
 		return render(request,'farmer_login.html',{})
 def update_sale(request,pk,land_id):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		if request.method == 'POST':
 			a = request.POST.get('sale')
 			b = request.POST.get('price')
@@ -319,13 +325,13 @@ def update_sale(request,pk,land_id):
 	else:
 		return render(request,'farmer_login.html',{})
 def employee_attendance(request):
-    if request.session.has_key('farmer'):
+    if 'farmer' in request.session:
         return render(request,'employee_attendance.html',{})
     else:
         return redirect("farmer_login")
 	
 def worker_daily_attendance(request):
-    if request.session.has_key('worker'):
+    if 'worker' in request.session:
         worker_id = request.session['worker_id']
         # Assuming you want to fetch attendance details of the worker
         details = Attendance.objects.filter(employee_id=worker_id)
@@ -333,7 +339,7 @@ def worker_daily_attendance(request):
 
 
 def show_attendance(request):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		farmers_id = request.session['farmer_id']
 		farmer_id=Register_Detail.objects.get(id=int(farmers_id))
 		date = request.GET.get('date')
@@ -356,7 +362,7 @@ def show_attendance(request):
 		absent = Attendance.objects.filter(date=date,attendance='no',farmer_id=farmer_id).aggregate(Count('attendance'))
 	return render(request,'show_attendance.html',{'detail':detail,'att':att,'tot':tot,'present':present,'absent':absent})
 def employee_salary(request):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		farmers_id = request.session['farmer_id']
 		farmer_id=Register_Detail.objects.get(id=int(farmers_id))
 		detail = Apply.objects.filter(job_status='hired',farmer_id=farmer_id)
@@ -365,7 +371,7 @@ def employee_salary(request):
 		return render(request,'farmer_login.html',{})
 
 def calculate_salary(request):
-	if request.session.has_key('farmer'):
+	if 'farmer' in request.session:
 		emp_id = request.GET.get('id')
 		from_date = request.GET.get('from')
 		to_date = request.GET.get('to')
@@ -382,7 +388,7 @@ def calculate_salary(request):
 		return render(request,'farmer_login.html',{})
 		
 def enquiry_land(request):
-	if request.session.has_key('user'):
+	if 'user' in request.session:
 		user_id = request.session['user_id']
 		cursor = connection.cursor()
 		sql = '''SELECT d.id,d.sqrtft,u.name,u.mobile,d.amount,d.sale,d.acres,s.date,d.saled_price,s.status,s.id

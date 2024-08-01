@@ -18,7 +18,9 @@
 			<p>{{i.place}}</p>
 			<p>Posted Date: {{i.posted_date}}</p>
 			<a href="{% url 'apply' pk=i.id %}" class="btn btn-info btn-lg" style="margin-bottom: 30px;background-color:#08640D;border-color:#08640D; ">Apply Job</a>
-
+			{% if message %}
+			{{message}}
+			{% endif %}
 		</div>
 		{% empty %}
 			<h3>No Current Jobs</h3>
