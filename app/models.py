@@ -26,7 +26,7 @@ class Worker_Detail(models.Model):
 
 	
 class Job_Detail(models.Model):
-	farmer_id = models.ForeignKey(Worker_Detail, on_delete=models.CASCADE)
+	farmer_id = models.ForeignKey(Register_Detail, on_delete=models.CASCADE)
 	title = models.CharField(max_length=50)
 	skill = models.CharField(max_length=20)
 	experience = models.CharField(max_length=50)

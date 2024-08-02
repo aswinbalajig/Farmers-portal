@@ -104,7 +104,7 @@ def add_tractor(request):
 def add_job(request):
 	if 'farmer' in request.session:
 		user_id = request.session['farmer_id']
-		farmer_id = Worker_Detail.objects.get(id=int(user_id))
+		farmer_id = Register_Detail.objects.get(id=int(user_id))
 		cursor =connection.cursor()
 		post ='''SELECT u.email,u.id from app_register_detail as u WHERE u.user_type='worker' ORDER BY u.id DESC'''
 		sql=cursor.execute(post)
