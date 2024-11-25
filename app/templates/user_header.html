@@ -139,6 +139,11 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+  {% if messages %}
+  {% for i in messages %}
+    <div class="alert alert-danger">{{i}}</div>
+  {% endfor %}
+{% endif %}
   <style type="text/css">
     th,tr
     {

@@ -210,16 +210,19 @@ def delete_land(request,pk):
 def logout(request):
     try:
         del request.session['farmer']
-    except:
-     pass
-    return render(request, 'farmer_login.html', {})
+        messages.success(request, "You have been logged out successfully.")
+    except KeyError:
+        messages.error(request, "There was an issue logging out.")
+    return redirect('farmer_login') 
 def user_logout(request):
-    try:
-        del request.session['worker']
-        del request.session['user']
-    except:
-     pass
-    return render(request, 'login.html', {})
+		try:
+			del request.session['worker']
+			del request.session['user']
+			return render(request, 'login.html', {})
+		except KeyError:
+			messages.error(request, "There was an issue logging out.")
+			return redirect('')
+
 def apply_job(request):
 	if 'worker' in request.session:
 		detail = Job_Detail.objects.all()

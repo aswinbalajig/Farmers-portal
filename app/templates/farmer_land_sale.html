@@ -40,7 +40,7 @@
 						{% if i.9 == 'Rejected' %}
 							<span style="color: red;font-weight: bold;">Not Given</span>
 						{% elif i.9 == 'Purchased' %}
-							<span style="color: red;font-weight: bold;">Saled</span>
+							<span style="color: red;font-weight: bold;">Sold</span>
 							<p>S/L Price: {{i.8}}</p>
 						{% else %}
 						<a href="{% url 'update_sale' land_id=i.0 pk=i.10 %}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a> 
