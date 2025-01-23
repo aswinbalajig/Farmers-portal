@@ -7,8 +7,6 @@ from django.db import connection
 import random 
 from django.db.models import Sum, Count
 from django.conf import settings
-from django.core.mail import send_mail
-from django.core.mail import EmailMessage
 from django.utils import timezone
 Messages={}
 def home(request):
